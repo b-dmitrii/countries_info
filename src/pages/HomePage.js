@@ -12,7 +12,7 @@ export const HomePage = () => {
   const [filtredCountries, setFiltredCountries] = useState([]);
 
   useEffect(() => {
-    setFiltredCountries(countries);
+    if (countries) setFiltredCountries(countries);
   }, [countries]);
 
   const { push } = useHistory();
