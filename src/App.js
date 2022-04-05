@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
+
+import { Header } from "./components/Header";
+import { Main } from "./components/Main";
+
+import { HomePage } from "./pages/HomePage";
+import { NotFound } from "./pages/NotFound";
+import { Details } from "./pages/Details";
+import { useDispatch } from "react-redux";
+import { Operation } from "./store/countries";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(Operation.loadCountries());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Main>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/country/:name" component={Details} />
+          <Route component={NotFound} />
+        </Switch>
+      </Main>
+    </>
   );
 }
 
