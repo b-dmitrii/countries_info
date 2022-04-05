@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = `https://restcountries.com/v2/`;
-const REQUEST_TIMEOUT = 2000;
+const REQUEST_TIMEOUT = 5000;
 
 const createAPI = () => {
   const api = axios.create({
